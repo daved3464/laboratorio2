@@ -8,11 +8,12 @@ public class Cliente {
     private int index;
 
     @Getter
-    private String Nombre;
+    private String nombre;
 
     public Cliente (String nombre) throws EmptyStringException {
         this.setNombre(nombre);
     }
+    
     public Cliente(int index, String nombre)
             throws EmptyStringException,
             IndexOutOfBoundsException {
@@ -31,6 +32,6 @@ public class Cliente {
         if (nombre.isEmpty() || nombre == null)
             throw new EmptyStringException("El nombre del cliente no puede estar vacío");
 
-        this.Nombre = nombre;
+        this.nombre = nombre;
     }
 }
