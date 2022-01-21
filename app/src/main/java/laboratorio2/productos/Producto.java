@@ -33,6 +33,8 @@ public class Producto {
     this.setValor(valor);
     this.setCantidad(cantidad);
     this.setTipo(tipo);
+
+
   }
 
   public void setIndex(int index) {

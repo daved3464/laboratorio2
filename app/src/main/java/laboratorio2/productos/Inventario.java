@@ -13,7 +13,7 @@ public class Inventario {
 
   // Create
   public void registrarProducto(String nombre, int valor, int cantidad, TipoProducto tipo)
-      throws EmptyStringException, ListMaxIndexOutOfBoundsException {
+          throws Exception {
 
     // Excepción de limitación de Java
     if (this.Productos.size() == Integer.MAX_VALUE)
