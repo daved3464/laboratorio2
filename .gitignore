@@ -3,3 +3,10 @@
 
 # Ignore Gradle build output directory
 build
+*.dtmp
+.idea
+app/build
+app/bin
+app/.settings
+.settings
+.gradle

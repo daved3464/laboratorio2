@@ -1,17 +1,19 @@
 package laboratorio2.proveedores;
 
-import laboratorio2.proveedores.Proveedor;
+
 import laboratorio2.excepciones.EmptyStringException;
 import laboratorio2.excepciones.ListMaxIndexOutOfBoundsException;
 import lombok.Getter;
 
-import java.util.List;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 public class RepositorioProveedores {
     @Getter
-    private List<Proveedor> Proveedores;
+    private LinkedList<Proveedor> Proveedores;
 
     public RepositorioProveedores() {
+        this.Proveedores = new LinkedList<Proveedor>();
     }
 
     // Create
@@ -28,8 +30,16 @@ public class RepositorioProveedores {
     }
 
     // Read one, search by index
-    public Proveedor obtenerProveedor(int index) {
-        return this.Proveedores.get(index);
+    public Proveedor obtenerProveedor(int index) throws NoSuchElementException {
+        return this.Proveedores.stream()
+                .filter(p -> p.getIndex() == index)
+                .findFirst()
+                .orElseThrow();
+    }
+
+    // Search index in List
+    private int obtenerIndiceProveedor(int index){
+        return this.Proveedores.indexOf(this.obtenerProveedor(index));
     }
 
     // Read many, filter by name
@@ -54,4 +64,5 @@ public class RepositorioProveedores {
     public void eliminarProveedor(int index) {
         this.Proveedores.remove(index);
     }
+
 }

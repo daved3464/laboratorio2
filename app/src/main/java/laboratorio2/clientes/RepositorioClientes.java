@@ -4,13 +4,15 @@ import laboratorio2.excepciones.EmptyStringException;
 import laboratorio2.excepciones.ListMaxIndexOutOfBoundsException;
 import lombok.Getter;
 
-import java.util.List;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 public class RepositorioClientes {
     @Getter
-    private List<Cliente> Clientes;
+    private LinkedList<Cliente> Clientes;
 
     public RepositorioClientes() {
+        this.Clientes = new LinkedList<Cliente>();
     }
 
     // Create
@@ -28,7 +30,14 @@ public class RepositorioClientes {
 
     // Read one, search by index
     public Cliente obtenerCliente(int index) {
-        return this.Clientes.get(index);
+        return this.Clientes.stream()
+                .filter(c -> c.getIndex() == index)
+                .findFirst()
+                .orElseThrow();
+    }
+
+    public int obtenerIndiceCliente(int index) {
+        return this.Clientes.indexOf(this.obtenerCliente(index));
     }
 
     // Read many, filter by name
@@ -50,12 +59,12 @@ public class RepositorioClientes {
         Cliente cliente = this.obtenerCliente(index);
         cliente.setNombre(nombre);
 
-        this.Clientes.set(index, cliente);
+        this.Clientes.set(this.obtenerIndiceCliente(index), cliente);
     }
 
     // Delete
-    public void eliminarCliente(int index) {
-        this.Clientes.remove(index);
+    public void eliminarCliente(int index) throws NoSuchElementException {
+        this.Clientes.remove(this.obtenerIndiceCliente(index));
     }
 
 }
